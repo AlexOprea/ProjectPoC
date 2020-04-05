@@ -20,13 +20,6 @@ public enum AccountType {
 
     public static AccountType getAccountType(String accountType)
     {
-        for (AccountType value : AccountType.values())
-        {
-            if (value.getType().equals(accountType))
-            {
-                return value;
-            }
-        }
-        return null;
+        return Arrays.stream(AccountType.values()).filter(val->val.getType().equals(accountType)).findFirst().orElse(null);
     }
 }
