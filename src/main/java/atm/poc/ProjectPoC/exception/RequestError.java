@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import java.time.LocalDateTime;
 
 public class RequestError {
+    @JsonFormat
     private HttpStatus status;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime timestamp;
+    @JsonFormat
     private String errorMessage;
 
     public RequestError(@JsonProperty String errorMessage)

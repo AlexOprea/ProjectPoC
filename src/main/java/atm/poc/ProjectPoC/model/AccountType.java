@@ -1,5 +1,7 @@
 package atm.poc.ProjectPoC.model;
 
+import java.util.Arrays;
+
 public enum AccountType {
     CREDIT("credit"),
     DEPOSIT("deposit"),
@@ -14,5 +16,17 @@ public enum AccountType {
     public String getType()
     {
         return type;
+    }
+
+    public static AccountType getAccountType(String accountType)
+    {
+        for (AccountType value : AccountType.values())
+        {
+            if (value.getType().equals(accountType))
+            {
+                return value;
+            }
+        }
+        return null;
     }
 }

@@ -26,6 +26,7 @@ public class StubAccountDAO implements AccountDAO {
         if (acc != null)
         {
             log.info("Account with name {} found.",accountName);
+            return acc;
         }
         log.warn("No account found by name {}.",accountName);
         throw new AccountNotFound(accountName);

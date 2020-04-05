@@ -10,7 +10,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return String.format("%s. Your balance is: current account %f, credit account %f, deposit account %d",name,currentAccount,creditAccount,depositAccount);
+        return String.format("%s. Your balance is: current account %f, credit account %f, deposit account %f",name,currentAccount,creditAccount,depositAccount);
     }
 
     public String getName() {

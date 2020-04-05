@@ -28,15 +28,22 @@ public class AccountService {
         return AccountConverter.convertAccountToDTO(account);
     }
 
-    public void withdrawFunds(String accountName, AccountType accountType, double amount) throws AccountNotFound, InvalidAccountName {
+    public AccountDTO withdrawFunds(String accountName, AccountType accountType, double amount) throws AccountNotFound, InvalidAccountName {
         Account account = accountDAO.getAccount(accountName);
         double leftValue = accountDAO.withdrawFromAccount(account, accountType.getType(),amount);
-        log.info("Hello {}, funds left on {}: {}",accountName, accountType.getType(), leftValue);
+        if (leftValue < 0)
+        {
+            log.info("Insufficient funds. Please try other operation.");
+        } else {
+            log.info("Hello {}, funds left on {}: {}", accountName, accountType.getType(), leftValue);
+        }
+        return AccountConverter.convertAccountToDTO(account);
     }
 
-    public void addFunds(String accountName, AccountType accountType, double amount) throws AccountNotFound, InvalidAccountName {
+    public AccountDTO addFunds(String accountName, AccountType accountType, double amount) throws AccountNotFound, InvalidAccountName {
         Account account = accountDAO.getAccount(accountName);
         double leftValue = accountDAO.addFundsToAccount(account, accountType.getType(),amount);
         log.info("Hello {}, funds added to {}. New balance: {}",accountName, accountType.getType(), leftValue);
+        return AccountConverter.convertAccountToDTO(account);
     }
 }
