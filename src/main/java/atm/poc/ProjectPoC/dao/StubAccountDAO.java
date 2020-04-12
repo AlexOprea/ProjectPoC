@@ -66,8 +66,8 @@ public class StubAccountDAO implements AccountDAO {
                 account.setCreditAccount(amountLeft);
                 return amountLeft;
             default:
-                log.warn("Invalid account name selected {}", accountName);
-                throw new InvalidAccountName(accountName);
+                log.warn("Invalid account name selected");
+                throw new InvalidAccountName();
         }
 
     }
@@ -94,7 +94,7 @@ public class StubAccountDAO implements AccountDAO {
                 account.setCreditAccount(amountLeft);
                 return amountLeft;
             default:
-                throw new InvalidAccountName(accountName);
+                throw new InvalidAccountName();
         }
 
 

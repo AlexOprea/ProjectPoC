@@ -1,8 +1,8 @@
 package atm.poc.ProjectPoC.exception;
 
 public class InvalidAccountName extends Exception {
-    public InvalidAccountName(String accountName)
+    public InvalidAccountName()
     {
-        super(String.format("Invalid account name %s",accountName));
+        super("Invalid account name ");
     }
 }

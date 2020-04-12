@@ -5,7 +5,8 @@ import java.util.Arrays;
 public enum AccountType {
     CREDIT("credit"),
     DEPOSIT("deposit"),
-    CURRENT("current");
+    CURRENT("current"),
+    INVALID_ACC("invalid");
     private String type;
 
     private AccountType(String type)
@@ -20,6 +21,6 @@ public enum AccountType {
 
     public static AccountType getAccountType(String accountType)
     {
-        return Arrays.stream(AccountType.values()).filter(val->val.getType().equals(accountType)).findFirst().orElse(null);
+        return Arrays.stream(AccountType.values()).filter(val->val.getType().equals(accountType)).findFirst().orElse(INVALID_ACC);
     }
 }

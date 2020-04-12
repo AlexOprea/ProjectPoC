@@ -2,7 +2,7 @@ package atm.poc.ProjectPoC.api;
 
 import atm.poc.ProjectPoC.exception.AccountNotFound;
 import atm.poc.ProjectPoC.exception.InvalidAccountName;
-import atm.poc.ProjectPoC.model.Account;
+import atm.poc.ProjectPoC.exception.InvalidAmount;
 import atm.poc.ProjectPoC.model.AccountDTO;
 import atm.poc.ProjectPoC.model.AccountType;
 import atm.poc.ProjectPoC.model.FundsDTO;
@@ -26,13 +26,13 @@ public class AccountController {
     }
 
     @PostMapping(path = "/withdraw")
-    public AccountDTO withdrawFunds(@RequestBody FundsDTO fundsDTO) throws InvalidAccountName, AccountNotFound {
+    public AccountDTO withdrawFunds(@RequestBody FundsDTO fundsDTO) throws InvalidAccountName, AccountNotFound, InvalidAmount {
 
         return accountService.withdrawFunds(fundsDTO.getAccountName(), AccountType.getAccountType(fundsDTO.getAccountType()), fundsDTO.getFunds());
     }
 
     @PostMapping(path = "/addFunds")
-    public AccountDTO addFunds(@RequestBody FundsDTO fundsDTO) throws InvalidAccountName, AccountNotFound {
+    public AccountDTO addFunds(@RequestBody FundsDTO fundsDTO) throws InvalidAccountName, AccountNotFound, InvalidAmount {
 
         return accountService.addFunds(fundsDTO.getAccountName(), AccountType.getAccountType(fundsDTO.getAccountType()), fundsDTO.getFunds());
     }

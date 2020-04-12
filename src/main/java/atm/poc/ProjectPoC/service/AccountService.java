@@ -4,6 +4,7 @@ import atm.poc.ProjectPoC.converter.AccountConverter;
 import atm.poc.ProjectPoC.dao.AccountDAO;
 import atm.poc.ProjectPoC.exception.AccountNotFound;
 import atm.poc.ProjectPoC.exception.InvalidAccountName;
+import atm.poc.ProjectPoC.exception.InvalidAmount;
 import atm.poc.ProjectPoC.model.Account;
 import atm.poc.ProjectPoC.model.AccountDTO;
 import atm.poc.ProjectPoC.model.AccountType;
@@ -28,8 +29,13 @@ public class AccountService {
         return AccountConverter.convertAccountToDTO(account);
     }
 
-    public AccountDTO withdrawFunds(String accountName, AccountType accountType, double amount) throws AccountNotFound, InvalidAccountName {
+    public AccountDTO withdrawFunds(String accountName, AccountType accountType, double amount) throws AccountNotFound, InvalidAccountName, InvalidAmount {
+        if (amount < 0)
+        {
+            throw new InvalidAmount();
+        }
         Account account = accountDAO.getAccount(accountName);
+
         double leftValue = accountDAO.withdrawFromAccount(account, accountType.getType(),amount);
         if (leftValue < 0)
         {
@@ -40,7 +46,11 @@ public class AccountService {
         return AccountConverter.convertAccountToDTO(account);
     }
 
-    public AccountDTO addFunds(String accountName, AccountType accountType, double amount) throws AccountNotFound, InvalidAccountName {
+    public AccountDTO addFunds(String accountName, AccountType accountType, double amount) throws AccountNotFound, InvalidAccountName, InvalidAmount {
+        if (amount < 0)
+        {
+            throw new InvalidAmount();
+        }
         Account account = accountDAO.getAccount(accountName);
         double leftValue = accountDAO.addFundsToAccount(account, accountType.getType(),amount);
         log.info("Hello {}, funds added to {}. New balance: {}",accountName, accountType.getType(), leftValue);
